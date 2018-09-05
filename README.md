@@ -33,13 +33,12 @@ To reload all terminals
   * urxvt (obviously)
   * Perl ≥ 5.20 (could be easily fixed to work with more ancient
     versions if needed)
-  * AnyEvent
   * Linux::FD
   * common::sense
 
 You can install the needed packages with CPAN:
 
-    sudo cpan AnyEvent Linux::FD common::sense
+    sudo cpan Linux::FD common::sense
 
 ## Installation
 
