@@ -1,7 +1,7 @@
 # `urxvt` configuration reload
 
 This plugin allows you to reload `urxvt` configuration at runtime
-by sending `SIGHUP` to the `urxvt` process.
+by sending `SIGUSR1` to the `urxvt` process.
 
 ## What can be reloaded?
 
@@ -24,7 +24,7 @@ To reload the current terminal (will *only* work from the prompt):
 To reload all terminals
 
     for term in $(pgrep urxvt); do
-        kill -s HUP $term
+        kill -s USR1 $term
     done
 
 
