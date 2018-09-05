@@ -23,10 +23,7 @@ To reload the current terminal (will *only* work from the prompt):
 
 To reload all terminals
 
-    for term in $(pgrep urxvt); do
-        kill -s USR1 $term
-    done
-
+    killall -SIGUSR1 urxvt
 
 ## Dependencies
 
@@ -53,3 +50,6 @@ You must add `config-reload` to the `URxvt.perl-ext-common` resource in
     URxvt.perl-ext-common: default,clipboard,...,config-reload
 
 **Do not** add the `config-print` extension there!
+
+See https://github.com/muennich/urxvt-perls#installation for alternative
+installation methods (system-wide etc.).
