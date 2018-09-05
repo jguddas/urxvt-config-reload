@@ -13,7 +13,7 @@ sigprocmask(SIG_BLOCK, $sigset);
 my $sigfd = signalfd($sigset);
 my $libdir = dirname(__FILE__);
 
-our @terms = ();
+my $term;
 
 sub reload_all {
     my @lines = `urxvt --perl-lib $libdir -pe config-print 2>&1`;
@@ -47,9 +47,7 @@ sub reload_all {
         $cmd .= "\e]$key;$val\a";
     }
     # warn "CMD: " . ($cmd =~ s/\e/\\e/gr =~ s/\a/\\a/gr);
-    for (@terms) {
-        $_->cmd_parse($cmd);
-    }
+    $term->cmd_parse($cmd);
 }
 
 our $watch = AnyEvent->io (
@@ -62,16 +60,11 @@ our $watch = AnyEvent->io (
           );
 
 sub on_start {
-    my ($ext) = @_;
-    # warn "START ext=$ext TERM=$TERM";
-    push @terms, $TERM;
-    ();
+    $term = $TERM;
+    ()
 }
 
 sub on_destroy {
-    my ($ext) = @_;
-    # warn "END ext=$ext TERM=$TERM";
-    @terms = grep { $_ != $TERM } @terms;
-    if (!@terms) { undef $watch; }
-    ();
+    undef $watch;
+    ()
 }
