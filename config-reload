@@ -22,8 +22,6 @@ sub reload_all {
         $resource{$1} = $2 if (/(.*?): (.*)/);
     }
     my $cmd = "";
-    my $i = 0;
-RESOURCE:
     for (keys %resource) {
         my $key;
         given ($_) {
@@ -41,9 +39,9 @@ RESOURCE:
                 if (my ($col, $row) = $resource{$_} =~ /(\d+)x(\d+)/) {
                     $cmd .= "\e[8;${row};${col}t";
                 }
-                next RESOURCE;
+                next;
             }
-            default { next RESOURCE }
+            default { next }
         }
         my $val = $resource{$_};
         $cmd .= "\e]$key;$val\a";
