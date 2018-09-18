@@ -19,7 +19,7 @@ Currently only color, font and geometry settings are reloaded.
 
 To reload the current terminal (will *only* work from the prompt):
 
-    kill -s HUP $(ps -p $$ -o ppid=)
+    kill -s USR1 $(ps -p $$ -o ppid=)
 
 To reload all terminals
 
