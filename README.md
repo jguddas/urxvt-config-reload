@@ -50,6 +50,3 @@ You must add `config-reload` to the `URxvt.perl-ext-common` resource in
     URxvt.perl-ext-common: default,clipboard,...,config-reload
 
 **Do not** add the `config-print` extension there!
-
-See https://github.com/muennich/urxvt-perls#installation for alternative
-installation methods (system-wide etc.).
