@@ -3,13 +3,9 @@
 use v5.20;
 use common::sense;
 
-use Linux::FD qw(signalfd);
-use POSIX;
+use AnyEvent;
 use File::Basename qw(dirname);
 
-my $sigset = POSIX::SigSet->new(&POSIX::SIGUSR1);
-sigprocmask(SIG_BLOCK, $sigset);
-my $sigfd = signalfd($sigset);
 my $libdir = dirname(__FILE__);
 
 my $term;
@@ -49,11 +45,9 @@ sub reload_all {
     $term->cmd_parse($cmd);
 }
 
-our $watch = urxvt::anyevent->io (
-                fh   => $sigfd, # which file handle to check
-                poll => "r",     # which event to wait for ("r"ead data)
-                cb   => sub {    # what callback to execute
-                    sysread $sigfd, my $dummy, 4096;
+our $watch = AnyEvent->signal (
+                signal => "USR1",
+                cb => sub {    # what callback to execute
                     reload_all;
                 }
             );

@@ -30,7 +30,7 @@ To reload all terminals
   * urxvt (obviously)
   * Perl ≥ 5.20 (could be easily fixed to work with more ancient
     versions if needed)
-  * Linux::FD
+  * AnyEvent
   * common::sense
 
 You can install the needed packages with CPAN:
