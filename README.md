@@ -35,7 +35,7 @@ To reload all terminals
 
 You can install the needed packages with CPAN:
 
-    sudo cpan AnyEvent common::sense
+    sudo cpan Linux::FD common::sense
 
 ## Installation
 
